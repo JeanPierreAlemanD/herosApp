@@ -7,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
   ]
 })
 export class NewPageComponent implements OnInit {
+  public publishers = [
+    { id: 'DC -comics', value: 'DC - Comics' },
+    { id: 'Marvel Comics', value: 'Marvel- Comics' }
+  ]
 
   constructor() { }
 

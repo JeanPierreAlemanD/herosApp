@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { HeroesServices } from '../../services/heroes.service';
+import { ActivatedRoute, Router } from '@angular/router';
+import { delay, switchMap } from 'rxjs';
+import { Hero } from '../../interfaces/hero.interface';
 
 @Component({
   selector: 'app-hero-page',
@@ -8,9 +12,32 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HeroPageComponent implements OnInit {
 
-  constructor() { }
+  public hero?: Hero;
+
+  constructor(
+    private heroService: HeroesServices,
+    private activatedRoute: ActivatedRoute,
+    private router: Router
+  ) { }
+
 
   ngOnInit(): void {
+
+    this.activatedRoute.params.pipe(
+      switchMap(({ id }) => this.heroService.getHeroesById(id)),
+    ).subscribe(hero => {
+      if (!hero) return this.router.navigate(['/heroes/list']);
+      this.hero = hero;
+      console.log({ hero });
+      return;
+    })
   }
+
+
+  goback() {
+    this.router.navigateByUrl('heroes/list');
+  }
+
+
 
 }
