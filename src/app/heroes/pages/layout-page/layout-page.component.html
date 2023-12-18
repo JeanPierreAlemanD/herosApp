@@ -33,7 +33,10 @@
     </button>
 
     <span class="spacer"></span>
-    <button mat-button>Login</button>
+
+    <span>{{ CurrentUser?.email }}</span>
+
+    <button mat-button (click)="logout()">Logout</button>
   </mat-toolbar>
 
   <div class="container mt-2">

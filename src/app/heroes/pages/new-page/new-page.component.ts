@@ -53,8 +53,6 @@ export class NewPageComponent implements OnInit {
 
       switchMap(({ id }) => this.heroService.getHeroesById(id)),
     ).subscribe(hero => {
-      console.log('Guardar--> ', hero);
-
       if (!hero) {
         return this.router.navigateByUrl('/');
       }
